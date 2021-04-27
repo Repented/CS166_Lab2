@@ -1,14 +1,14 @@
-DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS Professor;
 
-CREATE TABLE Students (SID numeric (9,0), Name
-	text, Grade float);
+CREATE TABLE Professor (prof_ssn integer, PRIMARY KEY(ssn), name text,
+	age integer, rank integer, speciality text);
 
-INSERT INTO Students VALUES (860507041, 'John Anderson', 3.67);
-INSERT INTO Students VALUES (860309067, 'Tom Kamber', 3.12);
+CREATE TABLE Graduate (parent_gradssn integer, PRIMARY KEY (parent_gradssn),
+	child_gradssn integer, FOREIGN KEY (child_gradssn) REFERENCES Graduate);
 
-SELECT SID, Name, Grade FROM Students WHERE SID = 860507041;
+CREATE TABLE Project (pno integer, PRIMARY KEY (pno), sponsor text, 
+	start_date text, end_date text, budget integer, prof_ssn integer,
+	FOREIGN KEY (prof_ssn) REFERENCES Professor);
 
-INSERT INTO Students VALUES (860704039, 'George Haggerty', 3.67);
-
-SELECT SID, Name, Grade FROM Students WHERE Grade = 
-	3.67;
+CREATE TABLE Dept (dno integer, PRIMARY KEY(dno), dname text, office text, 
+	prof_ssn integer, FOREIGN KEY (prof_ssn) REFERENCES Professor);
