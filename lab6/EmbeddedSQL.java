@@ -248,17 +248,17 @@ public class EmbeddedSQL {
       }
    }//end QueryExample
    
-   public static void Query1(EmbeddedSQL esql){
-      // Your code goes here.
-   	try {
-      String query = "SELECT suppliers.sname, COUNT(parts.pid) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname;";
-      int rowCount = esql.executeQuery(query);
-      System.out.println("total row(s): " + rowCount);
-      }
-   	catch (Exception e) {
-   		System.err.println(e.getMessage());
-   	}
-   }//end Query1
+	public static void Query1(EmbeddedSQL esql){
+		// Your code goes here.
+		try {
+			String query = "SELECT suppliers.sname, COUNT(parts.pid) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
+	}//end Query1
 
    public static void Query2(EmbeddedSQL esql){
       // Your code goes here.
