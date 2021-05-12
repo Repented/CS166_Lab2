@@ -287,7 +287,7 @@ public class EmbeddedSQL {
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
 		try {
-			String query = "SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
+			String query = "create view temp as SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
 			query += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
 			query += " SELECT temp.sname, MAX(catalog.cost) FROM temp, catalog WHERE temp.sid = catalog.sid GROUP BY temp.sname;";
 			int rowCount = esql.executeQuery(query);
