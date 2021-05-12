@@ -317,7 +317,10 @@ public class EmbeddedSQL {
    public static void Query6(EmbeddedSQL esql){
       // Your code goes here.
 		try {
-			String query = "SELECT suppliers.sname, COUNT(parts) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname HAVING COUNT(parts) >= 3;";
+			String query = "SELECT Suppliers.address FROM Suppliers, Catalog, Parts WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid AND Parts.pname = ";
+			System.out.println("\tEnter Part Name: ");
+			String input = in.readLine();
+			query += input + ";";
 			int rowCount = esql.executeQuery(query);
 			System.out.println("total row(s): " + rowCount);
 		}
