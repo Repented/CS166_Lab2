@@ -262,32 +262,64 @@ public class EmbeddedSQL {
 
    public static void Query2(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+		try {
+			String query = "SELECT suppliers.sname, COUNT(parts) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname HAVING COUNT(parts) >= 3;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
    }//end Query2
 
    public static void Query3(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+		try {
+			String query = "SELECT suppliers.sname, COUNT(*) FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green' GROUP BY suppliers.sname;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
    }//end Query3
 
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+		try {
+			String query = "SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
+			query += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
+			query += " SELECT temp.sname, MAX(catalog.cost) FROM temp, catalog WHERE temp.sid = catalog.sid GROUP BY temp.sname;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
    }//end Query4
 
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+		try {
+			String query = "SELECT suppliers.sname, COUNT(parts) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname HAVING COUNT(parts) >= 3;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
    }//end Query5
 
    public static void Query6(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+		try {
+			String query = "SELECT suppliers.sname, COUNT(parts) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname HAVING COUNT(parts) >= 3;";
+			int rowCount = esql.executeQuery(query);
+			System.out.println("total row(s): " + rowCount);
+		}
+	   	catch (Exception e) {
+	   		System.err.println(e.getMessage());
+	   	}
    }//end Query6
 
 }//end EmbeddedSQL
