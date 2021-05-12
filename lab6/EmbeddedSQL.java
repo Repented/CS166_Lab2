@@ -253,7 +253,7 @@ public class EmbeddedSQL {
 		try {
 			String query = "SELECT suppliers.sname, COUNT(parts.pid) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname;";
 			int rowCount = esql.executeQuery(query);
-			System.out.println("total row(s): " + rowCount);
+			// System.out.println("total row(s): " + rowCount);
 		}
 	   	catch (Exception e) {
 	   		System.err.println(e.getMessage());
