@@ -287,6 +287,9 @@ public class EmbeddedSQL {
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
 		try {
+			String update = "DROP VIEW IF EXISTS temp cascade; create view temp as SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
+			update += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
+			esql.executeUpdate(update);
 			// String query = "DROP VIEW IF EXISTS temp cascade; create view temp as SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
 			// query += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
 			String query = " SELECT temp.sname, MAX(catalog.cost) FROM temp, catalog WHERE temp.sid = catalog.sid GROUP BY temp.sname;";
