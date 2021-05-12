@@ -287,10 +287,10 @@ public class EmbeddedSQL {
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
 		try {
-			// String query = "create view temp as SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
-			// query += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
+			String query = "create view temp as SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Green'";
+			query += "INTERSECT SELECT suppliers.sname, suppliers.sid FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND parts.color = 'Red';";
 			// query += " SELECT temp.sname, MAX(catalog.cost) FROM temp, catalog WHERE temp.sid = catalog.sid GROUP BY temp.sname;";
-			String query = "SELECT suppliers.sname, MAX(catalog.cost) FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND suppliers.sid IN (SELECT suppliers.sid FROM Suppliers, Parts, Catalog WHERE Parts.pid = Catalog.pid AND Suppliers.sid = Catalog.sid AND Parts.color = 'Green' INTERSECT SELECT Suppliers.sid FROM Suppliers, Parts, Catalog WHERE Parts.pid = Catalog.pid AND Suppliers.sid = Catalog.sid AND Parts.color = 'Red') GROUP BY suppliers.sname;";
+			// String query = "SELECT suppliers.sname, MAX(catalog.cost) FROM suppliers, parts, catalog WHERE suppliers.sid = catalog.sid AND catalog.pid = parts.pid AND suppliers.sid IN (SELECT suppliers.sid FROM Suppliers, Parts, Catalog WHERE Parts.pid = Catalog.pid AND Suppliers.sid = Catalog.sid AND Parts.color = 'Green' INTERSECT SELECT Suppliers.sid FROM Suppliers, Parts, Catalog WHERE Parts.pid = Catalog.pid AND Suppliers.sid = Catalog.sid AND Parts.color = 'Red') GROUP BY suppliers.sname;";
 			int rowCount = esql.executeQuery(query);
 			System.out.println("total row(s): " + rowCount);
 		}
