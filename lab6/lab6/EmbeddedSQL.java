@@ -250,28 +250,14 @@ public class EmbeddedSQL {
    
    public static void Query1(EmbeddedSQL esql){
       // Your code goes here.
-   	  Statement stmt = con.createStatement();
-   	  stmt.executeUpdate("CREATE TABLE Suppliers" + 
-   	  						"(sid NUMERIC(9,0) PRIMARY KEY," +
-   	  						"sname CHAR(30), address CHAR(40))");
-   	  stmt.executeUpdate("CREATE TABLE Parts" + 
-   	  						"pid NUMERIC(9,0) PRIMARY KEY," + 
-   	  						"pname CHAR(40), color CHAR(15))");
-   	  stmt.executeUpdate("CREATE TABLE Catalog" + 
-   	  						"sid NUMERIC(9,0), pid NUMERIC(9,0)," + 
-   	  						"cost NUMERIC(10,2), PRIMARY KEY(sid, pid)," +
-   	  						"FOREIGN KEY (sid) REFERENCES Suppliers," +
-   	  						"FOREIGN KEY (pid) REFERENCES Parts)");
+   	try (
       String query = "SELECT suppliers.sname, COUNT(parts.pid) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname;";
-      ResultSet rs = stmt.executeQuery(query);
-      int rowCount = 0;
-      while (rs.next()) {
-      	for (int i = 1; i <= 2; ++i) {
-      		System.out.println(rs.getColumnName(i) + "=" + rs.getString(i));
-      		System.out.println();
-      		++rowCount;
-      	}
-      }
+      int rowCount = esql.executeQuery(query);
+      System.out.println("total row(s): " + rowCount);
+      )
+   	catch (Exception e) {
+   		System.err.println(e.getMessage());
+   	}
    }//end Query1
 
    public static void Query2(EmbeddedSQL esql){
