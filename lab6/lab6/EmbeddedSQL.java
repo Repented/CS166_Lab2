@@ -250,8 +250,15 @@ public class EmbeddedSQL {
    
    public static void Query1(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      String query = "SELECT suppliers.sname, COUNT(parts.pid) FROM suppliers, Parts, Catalog WHERE Suppliers.sid = Catalog.sid AND Catalog.pid = Parts.pid GROUP BY suppliers.sname;";
+      ResultSet rs = esql.executeQuery(query);
+      while (rs.next()) {
+      	for (int i = 1; i <= numCol; ++i) {
+      		System.out.println(rsmd.getColumnName(i) + "=" + rs.getString(i));
+      		System.out.println();
+      		++rowCount;
+      	}
+      }
    }//end Query1
 
    public static void Query2(EmbeddedSQL esql){
